@@ -53,7 +53,7 @@ function startTracking() {
 if ('geolocation' in navigator) {
 const options = {
     enableHighAccuracy: true, // Adjust accuracy as needed
-    timeout: 3500,
+    timeout: 1500,
 };
 
 watchId = navigator.geolocation.watchPosition(
