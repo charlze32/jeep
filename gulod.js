@@ -7,7 +7,7 @@ let watchId;
 function initMap() {
 const options = {
 center: { lat: 14.6599764, lng: 121.1130985 },
-zoom: 12,
+zoom: 15,
 mapTypeControl: false,
 zoomControl: false,
 };
