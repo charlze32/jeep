@@ -3,51 +3,11 @@ let directionsService;
 let directionsRenderer;
 let jeepneyMarker;
 let watchId;
-let notificationDistance = 50;
-
-const waypointSelect = document.getElementById("waypointSelect");
-waypointSelect.addEventListener("change", function() {
-  const selectedWaypointIndex = waypointSelect.selectedIndex;
-  const selectedWaypoint = waypointData[selectedWaypointIndex]; // Assuming waypoint data is stored in waypointData object
-});
-
-const waypointData = [
-  { lat: 14.67802, lng: 121.1276, name: "Thelma Store"} ,
-  { lat: 14.67716, lng: 121.12868, name: "Ilang-Ilang"} ,
-  { lat: 14.67687, lng: 121.12895, name: "St. Thomas"} ,
-  { lat: 14.67654, lng: 121.12881, name: "St. Andrew"} ,
-  { lat: 14.67579, lng: 121.12909, name: "St. Patrick"} ,
-
-];
-
-function checkDistanceFromWaypoint(userLocation) {
-  if (!selectedWaypoint) { // Check if a waypoint is selected
-    return; // Do nothing if no waypoint is chosen
-  }
-  
-  const waypointLatLng = new google.maps.LatLng(selectedWaypoint.lat, selectedWaypoint.lng);
-  const distance = google.maps.geometry.spherical.computeDistanceBetween(userLocation, waypointLatLng);
-  if (distance <= notificationDistance) {
-    showNotification("You are near " + selectedWaypoint.name + "!");
-  }
-}
-
-function checkDistanceFromWaypoint(userLocation) {
-  if (!selectedWaypoint) { // Check if a waypoint is selected
-    return; // Do nothing if no waypoint is chosen
-  }
-  
-  const waypointLatLng = new google.maps.LatLng(selectedWaypoint.lat, selectedWaypoint.lng);
-  const distanc = google.maps.geometry.spherical.computeDistanceBetween(userLocation, waypointLatLng);
-  if (distance <= notificationDistance) {
-    showNotification("You are near " + selectedWaypoint.name + "!");
-  }
-}
 
 function initMap() {
 const options = {
-center: { lat: 14.67654, lng: 121.12881 },
-zoom: 15,
+center: { lat: 14.6599764, lng: 121.1130985 },
+zoom: 12,
 mapTypeControl: false,
 zoomControl: false,
 };
@@ -68,17 +28,17 @@ document.getElementById("startTrackingBtn").addEventListener("click", startTrack
 document.getElementById("stopTrackingBtn").addEventListener("click", stopTracking);
 
 const route = {
-origin: { lat: 14.67826, lng: 121.12715 },
-destination: { lat: 14.67455, lng: 121.13012 },
-travelMode: 'DRIVING',
-waypoints: [
-  { location: { lat: 14.67802, lng: 121.1276 } },
-  { location: { lat: 14.67716, lng: 121.12868 } },
-  { location: { lat: 14.67687, lng: 121.12895 } },
-  { location: { lat: 14.67654, lng: 121.12881 } },
-  { location: { lat: 14.67579, lng: 121.12909 } },
-]
-};
+  origin: { lat: 14.67826, lng: 121.12715, name: "Jasmin" },
+  destination: { lat: 14.67455, lng: 121.13012, name: "St. John" },
+  travelMode: 'DRIVING',
+  waypoints: [
+  { location: { lat: 14.67802, lng: 121.1276, name: "Thelma Store" } },
+  { location: { lat: 14.67716, lng: 121.12868, name: "Ilang-Ilang" } },
+  { location: { lat: 14.67687, lng: 121.12895, name: "St. Thomas" } },
+  { location: { lat: 14.67654, lng: 121.12881, name: "St. Andrew" } },
+  { location: { lat: 14.67579, lng: 121.12909, name: "St. Anthony" } },
+  { location: { lat: 14.67541, lng: 121.12953, name: "St. Patrick" } },
+]};
 
 directionsService.route(route, (result, status) => {
 if (status === 'OK') {
@@ -87,13 +47,6 @@ if (status === 'OK') {
     console.error("Directions request failed due to " + status);
 }
 });
-
-function updateRoute(event) {
-  // Code to update route based on selected waypoint
-}
-
-const waypointSelect = document.getElementById("waypointSelect");
-waypointSelect.addEventListener("change", updateRoute);
 }
 
 function startTracking() {
@@ -125,58 +78,55 @@ watchId = null;
 }
 
 function updateJeepneyPosition(position) {
-  jeepneyMarker.setPosition(position);
-
-  const jeepneyPositionElement = document.getElementById("jeepneyPosition");
-  if (jeepneyPositionElement) {
-  jeepneyMarker.setPosition(position);
-  jeepneyPositionElement.textContent = position.lat() + "," + position.lng();
-  } else {
-  console.warn("Element with ID 'jeepneyPosition' not found. Unable to update text content.");
-  }
-  console.log("User Location:", position.lat(), position.lng());
-
-  checkDistanceFromWaypoint(userLocation);
+jeepneyMarker.setPosition(position);
+const jeepneyPositionElement = document.getElementById("jeepneyPosition");
+if (jeepneyPositionElement) {
+jeepneyMarker.setPosition(position);
+jeepneyPositionElement.textContent = position.lat() + "," + position.lng();
+} else {
+console.warn("Element with ID 'jeepneyPosition' not found. Unable to update text content.");
+}
+console.log("User Location:", position.lat(), position.lng());
 }        
 
 function stopTracking() {
 if (watchId) {
 navigator.geolocation.clearWatch(watchId);
 watchId = null;
-}}
+}
+}
+
+const notificationDistance = 3;
 
 function checkDistanceFromDestination(userLocation) {
-    const distance = google.maps.geometry.spherical.computeDistanceBetween(userLocation, new google.maps.LatLng(destination.lat, destination.lng));
+  // Get the dropdown element
+  const waypointSelect = document.getElementById("waypointSelect");
+
+  // Extract the selected waypoint index from the dropdown value (assuming the value format indicates waypoint number)
+  const selectedWaypointIndex = parseInt(waypointSelect.value.slice(-1)) - 1;
+
+  // Check if a valid option is selected (handle potential errors)
+  if (selectedWaypointIndex >= 0 && selectedWaypointIndex < route.waypoints.length) {
+    const selectedWaypoint = route.waypoints[selectedWaypointIndex];
+
+    // Calculate distance and trigger notification if near the waypoint
+    const distance = google.maps.geometry.spherical.computeDistanceBetween(userLocation, selectedWaypoint.location);
     if (distance <= notificationDistance) {
-        showNotification("You are near your destination!");
+      const waypointName = selectedWaypoint.name || "Selected Waypoint";
+      showWaypointNotification(waypointName);
     }
+  } else {
+    console.warn("Invalid waypoint selected or waypoints array might be empty.");
+  }
 }
 
-function showNotification(message) {
+function showWaypointNotification(waypointName) {
   if ('Notification' in window) {
-    Notification.requestPermission().then(function (permission) {
-      if (permission === 'granted') {
-        new Notification(message);
-      } else {
-        // Handle denied permission (e.g., display a message to the user)
-        console.warn("Notification permission denied!");
-      }
-    });
+      Notification.requestPermission().then(function (permission) {
+          if (permission === 'granted') {
+              const message = `You are near ${waypointName}!`;
+              new Notification(message);
+          }
+      });
   }
 }
-
-let lastNotificationTime = null;
-
-function updateJeepneyPosition(position) {
-  // ... existing code ...
-
-  const currentTime = Date.now();
-  const notificationThreshold = 5000; // Minimum time between notifications in milliseconds
-
-  if (lastNotificationTime === null || (currentTime - lastNotificationTime) >= notificationThreshold) {
-    checkDistanceFromWaypoint(position);
-    lastNotificationTime = currentTime;
-  }
-}
-
-
