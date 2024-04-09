@@ -121,12 +121,5 @@ function checkDistanceFromDestination(userLocation) {
 }
 
 function showWaypointNotification(waypointName) {
-  if ('Notification' in window) {
-      Notification.requestPermission().then(function (permission) {
-          if (permission === 'granted') {
-              const message = `You are near ${waypointName}!`;
-              new Notification(message);
-          }
-      });
-  }
+  alert(`You are near ${waypointName}!`);
 }
