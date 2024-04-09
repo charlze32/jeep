@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeepney Route Tracking</title>
+<style>
+    #map_twentyFour {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpR0eK7UcvaY_zCyKB0UI24pU-Z7VB0XQ&libraries=visualization&callback=initMap&loading=async" async defer></script>
+</head>
+<body>
+    <h1>Practice Route</h1>
+    <div id="map_twentyFour"></div>
+    <div class="jeepney-buttons ">
+        <button id="startTrackingBtn">Sakay Na!</button>
+        <button id="stopTrackingBtn">Para Po!</button>
+    </div>
+    
+    <select id="waypointSelect">
+      <option value="option1">Thelma Store</option>
+      <option value="option2">Ilang-Ilang</option>
+      <option value="option3">St. Thomas</option>
+      <option value="option4">St. Andrew</option>
+      <option value="option5">St. Anthony</option>
+      <option value="option6">St. Patrick</option>
+      <option value="option7">St. John</option>
+    </select>
+    <script src="gulod.js"></script>
+</body>
+</html>
