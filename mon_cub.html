@@ -12,7 +12,7 @@
 </style>
 </head>
 <body>
-    <h1>SSS - Cubao Prototype</h1>
+    <h1>Montalban - Cubao Prototype</h1>
     <div id="map_twentyFour"></div>
     <p>Jeepney's Current Position: <span id="jeepneyPosition"></span></p>
     <button id="startTrackingBtn">Start Tracking</button>
@@ -28,7 +28,7 @@
 
         function initMap() {
             const options = {
-                center: { lat: 14.6447, lng: 121.10596 },
+                center: { lat: 14.64686, lng: 121.1019 },
                 zoom: 12,
                 mapTypeControl: false,
                 zoomControl: false,
@@ -50,17 +50,14 @@
             document.getElementById("stopTrackingBtn").addEventListener("click", stopTracking);
 
             const route = {
-                origin: { lat: 14.63897, lng: 121.12593 },
-                destination: { lat: 14.63229, lng: 121.08024 },
+                origin: { lat: 14.67249, lng: 121.10918 },
+                destination: { lat: 14.62105, lng: 121.10191 },
                 travelMode: 'DRIVING',
                 waypoints: [
-                    { location: { lat: 14.64087, lng: 121.12503 } },
-                    { location: { lat: 14.64057, lng: 121.12186 } },
-                    { location: { lat: 14.64214, lng: 121.11069 } },
-                    { location: { lat: 14.64623, lng: 121.11274 } },
-                    { location: { lat: 14.65091, lng: 121.11132 } },
-                    { location: { lat: 14.65043, lng: 121.10617 } },
-                    { location: { lat: 14.6498, lng: 121.10532} },
+                    { location: { lat: 14.66001, lng: 121.10488 } },
+                    { location: { lat: 14.65978, lng: 121.10541} },
+                    { location: { lat: 14.64464, lng: 121.10079} },
+                    { location: { lat: 14.64414, lng: 121.1018} },
                 ]
             };
 
