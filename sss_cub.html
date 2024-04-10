@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeepney Route Tracking</title>
+<style>
+    #map_twentyFour {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+    <h1>SSS - Cubao Prototype</h1>
+    <div id="map_twentyFour"></div>
+    <p>Jeepney's Current Position: <span id="jeepneyPosition"></span></p>
+    <button id="startTrackingBtn">Start Tracking</button>
+    <button id="stopTrackingBtn">Stop Tracking</button>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpR0eK7UcvaY_zCyKB0UI24pU-Z7VB0XQ&libraries=visualization&callback=initMap&loading=async" async defer></script>
+    <script>
+        let map;
+        let directionsService;
+        let directionsRenderer;
+        let jeepneyMarker;
+        let watchId;
+
+        function initMap() {
+            const options = {
+                center: { lat: 14.6447, lng: 121.10596 },
+                zoom: 12,
+                mapTypeControl: false,
+                zoomControl: false,
+            };
+
+            map = new google.maps.Map(document.getElementById("map_twentyFour"), options);
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
+            jeepneyMarker = new google.maps.Marker({
+                map: map,
+                title: "Jeepney",
+                icon: {
+                    url: "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png",
+                    scaledSize: new google.maps.Size(50, 50)
+                }
+            });
+
+            document.getElementById("startTrackingBtn").addEventListener("click", startTracking);
+            document.getElementById("stopTrackingBtn").addEventListener("click", stopTracking);
+
+            const route = {
+                origin: { lat: 14.63897, lng: 121.12593 },
+                destination: { lat: 14.63229, lng: 121.08024 },
+                travelMode: 'DRIVING',
+                waypoints: [
+                    { location: { lat: 14.64087, lng: 121.12503 } },
+                    { location: { lat: 14.64057, lng: 121.12186 } },
+                    { location: { lat: 14.64214, lng: 121.11069 } },
+                    { location: { lat: 14.64623, lng: 121.11274 } },
+                    { location: { lat: 14.65091, lng: 121.11132 } },
+                    { location: { lat: 14.65043, lng: 121.10617 } },
+                    { location: { lat: 14.6498, lng: 121.10532} },
+                ]
+            };
+
+            directionsService.route(route, (result, status) => {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    console.error("Directions request failed due to " + status);
+                }
+            });
+        }
+
+        function startTracking() {
+  if ('geolocation' in navigator) {
+    watchId = navigator.geolocation.watchPosition(
+      throttle((position) => {
+        const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        updateJeepneyPosition(userLocation);
+      }, 1000), // Update frequency of 1 second
+      (error) => {
+        console.error("Error getting location:", error.message);
+      },
+      {
+        maximumAge: 30000, // Accept a cached position within 30 seconds
+        enableHighAccuracy: true // Request the best possible results
+      }
+    );
+  } else {
+    console.error("Geolocation is not supported by this browser.");
+  }
+}
+
+        function stopTracking() {
+            if (watchId) {
+                navigator.geolocation.clearWatch(watchId);
+                watchId = null;
+            }
+        }
+
+        function updateJeepneyPosition(position) {
+          jeepneyMarker.setPosition(position);
+          document.getElementById("jeepneyPosition").textContent = position.lat() + "," + position.lng();
+        }        
+
+        // Throttle function to limit the number of updates
+function throttle(func, limit) {
+  let lastFunc;
+  let lastRan;
+  return function() {
+    const context = this;
+    const args = arguments;
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(function() {
+        if ((Date.now() - lastRan) >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
+  }
+}
+    </script>
+</body>
+</html>
