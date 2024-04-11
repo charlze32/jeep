@@ -1,0 +1,186 @@
+@import url('https://fonts.cdnfonts.com/css/verdana-pro-cond');
+
+body {
+  background: linear-gradient(90deg, rgba(21,90,193,1) 35%, rgba(151,230,255,1) 100%);
+  margin: 0;
+
+}
+
+main {
+  margin: 20px;
+}
+
+.logo {
+  font-family: 'Verdana Pro', sans-serif;
+  font-weight: bold;
+  color: white;
+}
+
+
+.bot {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #0B1623;
+  padding: 2px;
+  display: flex;
+  margin: none;
+  overflow-x: auto;
+  justify-content: space-between center;
+}
+
+.nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  min-width: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: Verdana;
+  font-size: 13px;
+  font-weight: bold;
+  -webkit-text-stroke: black 1px;
+  text-decoration: none;
+  color: grey;
+  transition: background-color 0.1s ease-in-out;
+  padding: 15px 10px;
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+.nav__link:hover {
+  background: rgb(21,90,193);
+  background: radial-gradient(circle, rgba(21,90,193,1) 0%, rgb(125, 158, 168) 100%);
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__link--active {
+  color: white;
+  background-color:rgb(21,90,193); 
+  color: #ffffff; 
+  border-radius: 5px;
+}
+
+.navbar a.selected {
+  background-color:rgb(21,90,193); 
+  color: #ffffff; 
+  border-radius: 15px;
+}
+
+.marikit {
+  font-size: 35px;
+  text-align: center;
+  color: #C0F0F7;
+  font-weight: bold;
+  font-family: Verdana;
+  text-shadow: #0E1899 2px 1.5px;
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  border: 2px solid black;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  height: 140px;
+}
+
+.header {
+  background: rgb(126,201,245);
+  background: linear-gradient(90deg, rgba(126,201,245,1) 35%, rgba(57,87,237,1) 100%);
+  color: black;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: Verdana;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+  margin-top: 0;
+}
+
+.content {
+  background-color: white;
+  min-height: 90px; 
+  padding: 20px;
+}
+
+.navbar ul li.selected {
+  background-color:rgb(21,90,193); 
+  color: #ffffff; 
+  border-radius: 15px;
+}
+
+h3 {
+  color: #5491F5;
+  font-weight: bold;
+  font-family: Verdana;
+  font-size: 25px;
+  text-align: center;
+  background-color: #0B1623;
+  padding: 10px;
+}
+
+.background-picture {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.top-nav {
+  position: fixed;
+  top: 0; 
+  background-image: url('/marikittranspo/pictures/marikit.png');
+  height: 50px; 
+  width: 100%;
+  color: white;
+  display: flex;
+  font-family: Verdana, sans-serif;
+  align-items: center;
+  padding: 5px; 
+  z-index: 10;
+  background-size: cover; /* Scales the image to cover the entire element */
+  background-position: center;
+}
+
+.material-symbols-outlined {
+  align-items: right;
+  justify-content: right;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px; /* or the size of your logo */
+  margin-right: 10px;
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+header {
+  margin: 0;
+}

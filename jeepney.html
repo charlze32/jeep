@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Jeepneys - MarikitTranspo</title>
+    <link rel="stylesheet" href="styles/design.css">
+    <link rel="stylesheet" href="styles/jeepney.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+    <meta name ="viewport" content="width-device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no"/>
+    <script defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpR0eK7UcvaY_zCyKB0UI24pU-Z7VB0XQ&callback=initMap">
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+  
+</head>
+
+<body>
+    <header>
+      <nav class="top-nav">
+        <div class="logo-container">
+          <a class="marikitlogo" href="home.html">
+            <img src="pictures/mtlogo.png" alt="MarikitTranspo Logo" class="logo">
+          </a>          
+          <a>
+            <span class="brand-name">MarikitTranspo</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="bottom-nav">
+      <nav class="bot">
+        <a href="home.html" class="nav__link">
+          <i class="material-icons nav__icon">home</i>
+          <span class="nav__text">HOME</span>
+        </a>
+  
+        <a href="jeepney.html" class="nav__link nav__link--active">
+          <i class="material-icons nav__icon">directions_bus</i>
+          <span class="nav__text">JEEP</span>
+        </a>
+  
+        <a href="maps.html" class="nav__link">
+          <i class="material-icons nav__icon">location_on</i>
+          <span class="nav__text">MAPS</span>
+        </a>
+  
+        <a href="saved.html" class="nav__link">
+          <i class="material-icons nav__icon">bookmark_border</i>
+          <span class="nav__text">SAVE</span>
+        </a>
+      </nav>  
+  
+    <p class="jeepneys">JEEPNEYS</p>
+    <div class="column-container">
+      <div class="column" onclick="navigateToMarSanMon()">
+        <iframe id="gmap_canvas" src="https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=%20Marikina+(MarikitTranspo)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+        <div class="column-content">
+          <div class="route-label">MARIKINA - SAN MATEO/MONTALBAN</div>
+        </div>
+      </div>
+
+      <div class="column" onclick="navigateToMarMar()">
+            <iframe id="gmap_canvas" src="https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=%20Marikina+(MarikitTranspo)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            <div class="column-content">
+              <div class="route-label">MARIKINA - MARIKINA</div>
+            </div>
+        </div>
+
+        <div class="column" onclick="navigateToMarAnt()">
+          <iframe id="gmap_canvas" src="https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=%20Marikina+(MarikitTranspo)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+          <div class="column-content">
+            <div class="route-label">MARIKINA - ANTIPOLO</div>
+          </div>
+      </div>
+
+      <div class="column" onclick="navigateToMarPas()">
+        <iframe id="gmap_canvas" src="https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=%20Marikina+(MarikitTranspo)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+        <div class="column-content">
+          <div class="route-label">MARIKINA - PASIG</div>
+        </div>
+    </div>
+
+    </div>
+</body>
+<script>
+  function navigateToMarSanMon() {
+      window.location.href = "mar_san_mon.html";
+  }
+  function navigateToMarPas() {
+      window.location.href = "mar_pas.html";
+  }
+  function navigateToMarAnt() {
+      window.location.href = "mar_ant.html";
+  }  
+  function navigateToMarMar() {
+      window.location.href = "marikina_jeepney_routes.html";
+  }
+</script>
+</html>
+
